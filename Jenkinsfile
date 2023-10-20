@@ -1,0 +1,47 @@
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                echo "Checkout"
+                git branch: 'main',url: 'https://github.com/ricardoahumada/github-jenkins-test-repo'
+
+            }
+        }
+        stage('Build') {
+            steps {
+                echo "Building"
+            }
+        }
+        stage('Test') {
+            steps {
+                echo "Testing"
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo "Deploying"
+                // retry(3) {
+                //     bat 'I am not going to deploy :c'
+                // }
+                timeout(time: 3, unit: 'SECONDS') {
+                    bat 'ping -n 10 127.0.0.1'
+                }
+            }
+        }
+    }
+    post {
+        always {
+            echo "I will always get executed"
+        }
+        success {
+            echo "I will be executed if the build is success"
+        }
+        failure {
+            echo "I will be executed if the build fails"
+        }
+        unstable {
+            echo "I will be executed if the build is unstable"
+        }
+    }
+}
