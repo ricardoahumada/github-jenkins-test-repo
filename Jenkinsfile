@@ -24,9 +24,9 @@ pipeline {
                 // retry(3) {
                 //     bat 'I am not going to deploy :c'
                 // }
-                timeout(time: 3, unit: 'SECONDS') {
-                    bat 'ping -n 10 127.0.0.1'
-                }
+                // timeout(time: 3, unit: 'SECONDS') {
+                    // bat 'ping -n 10 127.0.0.1'
+                // }
             }
         }
     }
